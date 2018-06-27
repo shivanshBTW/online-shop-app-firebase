@@ -10,3 +10,6 @@ table{
 .show{
     display: block;
 }
+#main-section{
+    margin-top: 10px
+}

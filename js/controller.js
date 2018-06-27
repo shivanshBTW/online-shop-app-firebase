@@ -3,40 +3,45 @@ var counter;
 var id;
 var isRunFlag;
 var loginID;
+
 function init() {
-    bindEvents();    
+    bindEvents();
 }
 
 const countIncrease = () => {
     id = counter.next().value;
     // console.log(id);
-    productOperations.setId(loginID,id);
+    productOperations.setId(loginID, id);
     document.querySelector('#itemID').innerText = id;
 }
 
 function bindEvents() {
     document.querySelector('#addBtn').addEventListener('click', add);
-    document.querySelector('#loginButton').addEventListener('click',login);
+    document.querySelector('#loginButton').addEventListener('click', login);
 }
 
-function login(){
-    document.querySelector('#main-section').className = 'show';
+function login() {
     loginID = document.querySelector('#loginID').value;
-    isRunFlag = false;
-    var prom = productOperations.getId(loginID);
-    prom.then(data=>{
-        // counter = autoGen(parseInt(productOperations.get));
-        if(data){
-        counter = autoGen(data);
-        }
-        else{
-            counter = autoGen(1);
-        }
-        // console.log(counter);
-        countIncrease();
-    });    
-    
-    printObject();
+    if (!loginID) {
+        alert('Enter an ID');
+    } else {
+        document.querySelector('#main-section').className = 'show';
+        isRunFlag = false;
+        var prom = productOperations.getId(loginID);
+        prom.then(data => {
+            // counter = autoGen(parseInt(productOperations.get));
+            if (data) {
+                counter = autoGen(data);
+            } else {
+                counter = autoGen(1);
+            }
+            // console.log(counter);
+            countIncrease();
+        });
+
+        printObject();
+    }
+
 }
 
 function add() {
@@ -45,7 +50,7 @@ function add() {
     var price = document.querySelector('#price').value;
     var url = document.querySelector('#url').value;
     var productObject = new Product(id, name, price, url);
-    productOperations.addProducts(loginID,productObject);
+    productOperations.addProducts(loginID, productObject);
     printObject();
     countIncrease();
 }
@@ -88,7 +93,7 @@ function createOperation(id) {
     var button = document.createElement('button');
     button.className = 'btn btn-dark fa fa-close';
     button.addEventListener('click', deleteEntry);
-    button.setAttribute('pid',id);
+    button.setAttribute('pid', id);
     // button.innerHTML= '<i class="fa fa-close" aria-hidden="true"></i>';
     // console.log(button);
     return button;
@@ -96,8 +101,8 @@ function createOperation(id) {
 
 function deleteEntry() {
     var id = this.getAttribute("pid");
-    productOperations.delete(loginID,id);
-    console.log('id is ',id);
+    productOperations.delete(loginID, id);
+    console.log('id is ', id);
     // isRunFlag=false;
     printObject();
 }
