@@ -1,11 +1,11 @@
 var productOperations = {
-    addProducts(productObject) {
-        firebase.database().ref('products/' + productObject.id).set(productObject);
+    addProducts(loginID,productObject) {
+        firebase.database().ref(loginID+'/products/' + productObject.id).set(productObject);
         // console.log(productObject);
     },
-    searchAll() {
+    searchAll(loginID) {
         var pr = new Promise((resolve, reject) => {
-            var data = firebase.database().ref('products/');
+            var data = firebase.database().ref(loginID+'/products/');
             data.on('value', snapshot => {
                 var object = snapshot.val();
                 // console.log(object);
@@ -14,9 +14,9 @@ var productOperations = {
         })
         return pr;
     },
-    searchByID(id) {
+    searchByID(loginID,id) {
         var pr = new Promise((resolve, reject) => {
-            var data = firebase.database().ref('products/' + id);
+            var data = firebase.database().ref(loginID+'/products/' + id);
             data.on('value', snapshot => {
                 var object = snapshot.val();
                 // console.log(object);
@@ -25,22 +25,22 @@ var productOperations = {
         })
         return pr;
     },
-    sort(id) {
-        var prodRef = firebase.database().ref('products/');
+    sort(loginID,id) {
+        var prodRef = firebase.database().ref(loginID+'/products/');
         // prodRef.orderByChild
     },
-    delete(id) {
+    delete(loginID,id) {
         // var pr = new Promise((resolve, reject) => {
-        var data = firebase.database().ref('products/' + id);
+        var data = firebase.database().ref(loginID+'/products/' + id);
         data.on('value', snapshot => {
             data.remove();
         })
         // })
         // return pr;
     },
-    getId() {
+    getId(loginID) {
         var pr = new Promise((resolve, reject) => {
-            var data = firebase.database().ref('productID');
+            var data = firebase.database().ref(loginID+'/productID');
             data.on('value', snapshot => {
                 var object = snapshot.val();
                 // console.log(object);
@@ -49,8 +49,8 @@ var productOperations = {
         })
         return pr;
     },
-    setId(id) {
-        firebase.database().ref('productID').set(id);
+    setId(loginID,id) {
+        firebase.database().ref(loginID+'/productID').set(id);
     }
 
 }

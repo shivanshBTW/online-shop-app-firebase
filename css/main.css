@@ -4,3 +4,9 @@
 table{
     margin-top: 10px;
 }
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
