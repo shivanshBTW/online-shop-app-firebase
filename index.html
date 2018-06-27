@@ -13,6 +13,7 @@
     <script src="./js/Product.js"></script>
     <script src="./js/db.js"></script>
     <script src="./js/controller.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="./css/main.css">
@@ -44,13 +45,17 @@
         </form>
         <button class="btn btn-primary" id="addBtn">Add</button>
         <br>
-        <table class="table table-bordered" id="itemTable">
-            <tr>
-                <td>ID</td>
-                <td>Name</td>
-                <td>Price</td>
-                <td>URL</td>
-            </tr>
+        <table class="table table-bordered" >
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Price</td>
+                    <td>URL</td>
+                    <td>Delete Button</td>
+                </tr>
+            </thead>
+            <tbody id="itemTable"></tbody>
         </table>
     </div>
 

@@ -9,8 +9,8 @@ var config = {
 };
 firebase.initializeApp(config);
 
-function* autoGen(){
-    var counter = 1;
+function* autoGen(start,condition){
+    var counter = start;
     while(true){
         yield counter;
         counter++;
